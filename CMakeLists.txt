@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.12)
 IF(DEFINED ENV{TRAVIS_BUILD_NUMBER})
 ELSE()
     set(ENV{TRAVIS_BUILD_NUMBER} 1)
