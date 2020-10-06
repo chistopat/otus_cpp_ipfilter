@@ -5,6 +5,7 @@
 #pragma once
 
 #include <array>
+#include <algorithm>
 #include <cinttypes>
 #include <sstream>
 #include <string>
