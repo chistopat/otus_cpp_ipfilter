@@ -15,7 +15,7 @@ set_target_properties(test_ip_filter PROPERTIES
         )
 target_link_libraries(test_ip_filter ${Boost_LIBRARIES})
 enable_testing()
-add_test(test_ip_filter test_suite)
+add_test(test_suite test_ip_filter)
 
 install(TARGETS ipfilter RUNTIME DESTINATION bin)
 
