@@ -12,8 +12,13 @@
 int main() {
   IpAddressManager ipManager;
   for (std::string row; getline(std::cin, row);) {
-    auto tokens = SplitString(row, '\t');
-    ipManager.Add(tokens[0]);
+    try {
+      auto tokens = SplitString(row, '\t');
+      ipManager.Add(tokens[0]);
+    } catch (std::invalid_argument& e) {
+      std::cout << "[ERROR] - Incorrect input: " << e.what() << std::endl;
+      continue;
+    }
   }
   ipManager.Sort();
   for (const auto query : searchQueries) {

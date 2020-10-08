@@ -8,7 +8,7 @@
 #include <algorithm>
 
 void IpAddressManager::Add(const std::string &ip_str) {
-  _pool.emplace_back(IpAddress(ip_str));
+  _pool.push_back(IpAddress(ip_str));
 }
 
 void IpAddressManager::PrintIf(
@@ -22,16 +22,10 @@ void IpAddressManager::PrintIf(
 }
 
 void IpAddressManager::Sort(Order sort_order) {
-  auto less = [](const auto &lhs, const auto &rhs) {
-    return lhs.AsDec() < rhs.AsDec();
-  };
-  auto greater = [](const auto &lhs, const auto &rhs) {
-    return lhs.AsDec() > rhs.AsDec();
-  };
   switch (sort_order) {
   case Order::DESC:
-    std::sort(_pool.begin(), _pool.end(), less);
+    std::sort(_pool.begin(), _pool.end(), std::less<>());
   case Order::ASC:
-    std::sort(_pool.begin(), _pool.end(), greater);
+    std::sort(_pool.begin(), _pool.end(), std::greater<>());
   }
 }

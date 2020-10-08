@@ -20,11 +20,11 @@ class IpAddress {
   uint32_t AsDec() const;
 
  private:
-  union UIp {
+  union {
     std::array<uint8_t, 4> octets;
     uint32_t inet_addr;
-  };
-  UIp ip_address;
+  } ip_address;
 };
 
 bool operator<(const IpAddress &lhs, const IpAddress &rhs);
+bool operator>(const IpAddress &lhs, const IpAddress &rhs);

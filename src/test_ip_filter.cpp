@@ -3,8 +3,6 @@
 //
 
 #define BOOST_TEST_MODULE test_version
-
-#include "helper.h"
 #include "ip_address.h"
 #include "ip_address_manager.h"
 #include "search.h"
@@ -78,5 +76,9 @@ BOOST_AUTO_TEST_CASE(test_filter_by_any) {
   ipManager.PrintIf(out, searchQueries[3]);
   BOOST_CHECK_EQUAL(out.str(),
                     "222.82.46.61\n46.173.235.246\n1.46.234.8\n1.29.168.46\n");
+}
+
+BOOST_AUTO_TEST_CASE(test_invalid_string) {
+
 }
 }
