@@ -26,5 +26,7 @@ class IpAddress {
   } ip_address;
 };
 
+std::vector<int> ParseAddress(const std::string& data);
+
 bool operator<(const IpAddress &lhs, const IpAddress &rhs);
 bool operator>(const IpAddress &lhs, const IpAddress &rhs);

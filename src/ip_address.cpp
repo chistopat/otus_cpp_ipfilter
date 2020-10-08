@@ -4,16 +4,29 @@
 
 #include "ip_address.h"
 
+std::vector<int> ParseAddress(const std::string& data) {
+  std::istringstream is(data);
+  std::vector<int> result(4);
+  char d0, d1, d2;
+  is >> result[0] >> d0 >> result[1] >> d1 >> result[2] >> d2 >> result[3];
+  if (!is.eof() || is.fail() || d0 != '.' || d1 != '.' || d2 != '.') {
+    throw std::invalid_argument("Invalid IPv4 format: " + data);
+  }
+  for (const auto item : result) {
+    if (item < 0 || item > 255) {
+      throw std::invalid_argument("Invalid IPv4 value: " + data);
+    }
+  }
+  return result;
+}
+
+
 IpAddress::IpAddress(const std::string &data) : ip_address({0, 0, 0, 0}) {
   if (!data.empty()) {
-    auto tokens = SplitString(data, '.');
+    auto tokens = ParseAddress(data);
     std::reverse(tokens.begin(), tokens.end());
     for (size_t i = 0; i < ip_address.octets.size(); i++) {
-      int octet = stoi(tokens[i]);
-      if (octet < 0 || octet > 255) {
-        throw std::invalid_argument("Unable to parse data: " + data);
-      }
-      ip_address.octets[i] = octet;
+      ip_address.octets[i] = tokens[i];
     }
   }
 }

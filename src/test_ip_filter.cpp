@@ -78,7 +78,23 @@ BOOST_AUTO_TEST_CASE(test_filter_by_any) {
                     "222.82.46.61\n46.173.235.246\n1.46.234.8\n1.29.168.46\n");
 }
 
-BOOST_AUTO_TEST_CASE(test_invalid_string) {
-
+BOOST_AUTO_TEST_CASE(test_empty_split) {
+  BOOST_REQUIRE_THROW(SplitString("", ' '), std::invalid_argument);
+}
+BOOST_AUTO_TEST_CASE(test_invalid_ip) {
+  BOOST_REQUIRE_THROW(IpAddress("0.500.0.11"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("-1.1.0.11"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("34.67.777.15"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("1.44.0.256"), std::invalid_argument);
+}
+BOOST_AUTO_TEST_CASE(test_invalid_last_symbol) {
+  BOOST_REQUIRE_THROW(IpAddress("127.0.0.1."), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("127.0.0.1_"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("127.0.0.1/"), std::invalid_argument);
+}
+BOOST_AUTO_TEST_CASE(test_invalid_format) {
+  BOOST_REQUIRE_THROW(IpAddress("127#0#0#1"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("127/0/0/1"), std::invalid_argument);
+  BOOST_REQUIRE_THROW(IpAddress("127!0!0!1"), std::invalid_argument);
 }
 }
